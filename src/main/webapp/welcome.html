@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome</title>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript">
+function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}
+</script>
+<meta name="google-signin-client_id" content="4498781067-d8pj3ot435is67nlmsqi4mrmb0bcolp3.apps.googleusercontent.com">
+</head>
+<body>
+
+<h4>Hello Signed IN User</h4>
+
+</body>
+</html>

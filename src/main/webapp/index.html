@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Donation Portal</title>
+
+<meta name="google-signin-client_id"
+	content="4498781067-d8pj3ot435is67nlmsqi4mrmb0bcolp3.apps.googleusercontent.com">
+<script src="./js/utility.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+	   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  
+  <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet"/>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+  
+<!-- <link rel="stylesheet" type="text/css" href="screen.css" />
+<link rel="stylesheet" type="text/css" href="demo.css" /> -->
+<style type="text/css">
+.style1 {
+	font-family: Calibri;
+	font-size: 150;
+}
+
+.style2 {
+	font-family: Calibri;
+	font-size: medium;
+}
+
+
+.required {
+    color: red;
+  }
+  .sidenav {
+  width: 100%;
+  position: absolute;
+  background: #0000;
+  overflow-x: hidden;
+  padding: 8px 25px;
+  font-size: large;
+  text-align: left;
+}
+.ui-autocomplete {
+    overflow-y: auto;
+    height: 200px;
+    overflow-x: hidden;
+}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+	
+<script>
+
+	function onSignIn(googleUser) {
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		console.log('Name: ' + profile.getName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		document.getElementById("submit").disabled = false;
+		document.getElementById("signin").style.display="none";
+		document.getElementById("signout").style.display="block";
+		var eValue = profile.getEmail()!=null ? profile.getEmail() :profile.getName();
+		
+		document.getElementById("enteredby").value =  eValue;
+	}
+
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function() {
+			document.getElementById("submit").disabled = true;
+			document.getElementById("signin").style.display="block";
+			document.getElementById("signout").style.display="none";
+			console.log('User signed out.');
+		});
+
+	}
+	
+	
+	function reloadPage(){
+		console.log(location);
+		location.reload();
+	}
+	
+	$(function() {
+		var donorList;
+		setDateRange();
+		getDonorDetailsOnName();	
+	});
+	
+</script>
+</head>
+<body style="background-color: #e4f2f2">
+
+
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<table width="100%" cellspacing=0>
+				<tr>
+					<td width=10%><img src="Nilaya1.png" alt="Logo" height=130
+						wiq=130 /></td>
+					<td valign="center"><strong><h1>Nilaya Foundation Donation Portal </h1></strong></td>
+				</tr>
+			</table>
+
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+		<div class="col-lg-8">
+		<nav class="navbar navbar-expand-md bg-info navbar-dark">
+			
+			<!-- Toggler/collapsibe Button -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+	
+			<!-- Navbar links -->
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item active"><a class="nav-link" href="./index.html">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="./donorrecords.html">Donation Details</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"></a></li>
+				</ul>
+			</div>
+		</nav>
+		</div>
+		<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+	</div>
+	<div id="detailsform"  style="display: block;">
+		
+		<!--  onsubmit="setTimeout(function(){window.location.reload();},10);-->
+		<form  action="javascript:UserAction(this)"  method="POST"  id="donorForm">
+			<div class="row">
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+				<div class="col-lg-4" style="padding-left: 20px">
+					<h2>Enter Donor Details</h2>
+					<span class="required" style="font-size: 75%">* Required Fields</span>
+				</div>
+				<div class="col-lg-2"></div>
+				<div class="col-lg-2">
+					<div id="loginform" class="container" style="display: block;">
+
+						<div id="signin" style="display: none;" align="right"
+							class="g-signin2" data-onsuccess="onSignIn" ></div>
+						<div id="signout" align="right" style="display: none;">
+							<a class="button" onclick="signOut();">Sign out</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+				<div class="col-lg-4" style="padding-left: 20px">
+					<div class="form-group" required>
+						<label for="name">Name: <span class="required">*</span></label> 
+						<input type="text" class="form-control autocomplete" id="donorName" placeholder="Enter Name" name="donorName" required  >
+
+					</div>
+					<div class="form-group" >
+						<label for="pan">PAN:<span class="required">*</span></label> 
+						<input type="text" class="form-control" id="donorPAN" placeholder="Enter PAN Number" name="donorPAN"  required >
+					</div>
+					
+					<div class="form-group" >
+						<label for="amount">Donation Amount: <span class="required">*</span></label> 
+						<input type="number" class="form-control" id="donationAmount" placeholder="Enter Donation Amount" name="donationAmount" min="1" required>
+					</div>
+										
+				</div>
+				<div class="col-lg-4" style="padding-left: 20px">
+					<div class="form-group" required>
+						<label for="email">Email: <span class="required">*</span></label>
+						<input type="email" class="form-control" id="donorEmail" placeholder="Enter email" name="donorEmail" required >
+					</div>
+					
+					<div class="form-group">
+						<label for="mobilenumber">Mobile Number:</label>
+						<input type="text" class="form-control" id="donorMobileNumber" placeholder="Enter Mobile Number" name="donorMobileNumber" >
+					</div>
+					<div class="form-group" required>
+						<label for="transactiondate">Donation Date: <span class="required">*</span></label>
+						<input type="date" class="form-control"  id="donationDate" placeholder="Enter Donation Date" name="donationDate" required>
+					</div>
+				</div>
+				<div class="col-lg-2" style="background-color: #e4f2f2">
+					<ul>
+						<li>Please enter valid donor email. If not available enter Volunteer email in place of donor email</li>
+						<li>Ensure to enter correct amount and date before submission.</li>
+						<li>Please enter PAN and Mobile Number of donor.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+				<div class="col-lg-4" style="padding-left: 20px">
+					<h2>Enter Volunteer Details</h2>
+				</div>
+				<div class="col-lg-4"></div>
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+				<div class="col-lg-4" style="padding-left: 20px">
+				
+				<div class="form-group">
+						<label for="volunteername">Name:</label> 
+						<input type="text" class="form-control" id="volunteerName" placeholder="Enter Volunteer Name" name="volunteerName">
+					</div>
+				</div>
+				<div class="col-lg-4" style="padding-left: 20px">
+				<div class="form-group">
+						<label for="volunteeremail">Email:</label>
+						<input type="email" class="form-control" id="volunteerEmail" placeholder="Enter Volunteer email" name="volunteerEmail">
+					</div>
+				</div>
+				<div class="col-lg-2" style="background-color: #e4f2f2"></div>
+			</div>
+			<br>
+			<input type="email" id="enteredby"  style="display: none" name="enteredby">
+			<input type="checkbox" id="newDonor" name="newDonor" value="newDonor" style="display: none">
+			<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8" >
+			<p style="text-align: center;"><button  type="submit" class="btn btn-success btn-block"  id="submit" >Submit</button><br> <span style="font-size: 75%; display: none" class="required">Login to Submit</span></p>
+			
+			</div>
+			<div class="col-lg-2"></div>
+			</div>
+			
+		</form>
+	</div>
+	
+	<div class="container">
+	<button id="successModal" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: None">Open Modal</button>
+	
+	<div class="modal fade"  data-backdrop="false" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Donation Receipt Status</h4>
+        </div>
+        <div class="modal-body">
+          <center><p id="receiptStatus" style="font-size:18px"></p></center>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="reloadPage();">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+	</div>
+	<!-- <a onclick="signOut();">Sign out</a> -->
+	
+</body>
+</html>
