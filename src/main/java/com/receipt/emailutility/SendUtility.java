@@ -19,12 +19,9 @@ import com.sun.mail.smtp.SMTPTransport;
 
 public class SendUtility {
 
-	/*
-	 * private final static String from= "nilaya.foundation@gmail.com"; private
-	 * final static String password = "fldkgkyftqbnjjow";
-	 */
-	private final static String from= "nilaya.foundation@gmail.com"; private
-	final static String password = "fldkgkyftqbnjjow";
+
+	private final static String from= ""; 
+	private final static String password = "";
 	
 	public static void send(String name,String to,String CC,String file, InputStream resourceAsStream) throws Exception{  
        
@@ -135,3 +132,4 @@ public class SendUtility {
 	 }
 	
 }
+
